@@ -13,19 +13,19 @@
             @csrf
             <div class="form-group">
                 <label for="title">Judul</label>
-                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}" required>
+                <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" id="title" value="{{ old('title') }}" placeholder="Contoh: Kelas Meracik Jamu" required>
                 @error('title') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group">
-                <label for="subtitle">Sub Judul (Teks besar di gambar)</label>
-                <input type="text" name="subtitle" class="form-control @error('subtitle') is-invalid @enderror" id="subtitle" value="{{ old('subtitle') }}" required>
+                <label for="subtitle">Sub Judul</label>
+                <input type="text" name="subtitle" class="form-control @error('subtitle') is-invalid @enderror" id="subtitle" value="{{ old('subtitle') }}" placeholder="Teks yang tampil di atas gambar" required>
                 @error('subtitle') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
             <div class="form-group">
-                <label for="description">Deskripsi</label>
-                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5" required>{{ old('description') }}</textarea>
+                <label for="description">Deskripsi Lengkap</label>
+                <textarea name="description" class="form-control @error('description') is-invalid @enderror" id="description" rows="5" placeholder="Jelaskan tentang aktivitas atau artikel ini..." required>{{ old('description') }}</textarea>
                 @error('description') <span class="text-danger">{{ $message }}</span> @enderror
             </div>
 
@@ -49,9 +49,15 @@
 
 @section('js')
 <script>
-    // Inisialisasi plugin untuk menampilkan nama file pada input file bootstrap
-    $(document).ready(function () {
-        bsCustomFileInput.init();
+    // PERBAIKAN SCRIPT INPUT FILE
+    document.addEventListener('DOMContentLoaded', function () {
+        // Menggunakan jQuery yang sudah ada di AdminLTE
+        $('.custom-file-input').on('change', function(event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
     });
 </script>
 @stop

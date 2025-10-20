@@ -76,18 +76,26 @@
                     data-description="<?php echo e($article->description); ?>" 
                     class="activity-card group cursor-pointer bg-dark-card rounded-2xl shadow-lg overflow-hidden transition-transform duration-300 hover:-translate-y-2 reveal-animation" 
                     style="transition-delay: <?php echo e($loop->iteration * 100); ?>ms;">
-                    <div class="overflow-hidden relative h-48 flex items-center justify-center bg-primary">
-                        <h2 class="text-4xl font-serif font-bold text-accent/20"><?php echo e($article->subtitle); ?></h2>
+                    <div class="relative h-48 overflow-hidden bg-cover bg-center" style="background-image: url('<?php echo e(asset('storage/' . $article->image)); ?>')">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-center p-4">
+                            <h2 class="text-2xl font-serif font-bold text-white text-center"><?php echo e($article->subtitle); ?></h2>
+                        </div>
                     </div>
-                    <div class="p-6 flex flex-col">
-                        <h3 class="font-serif text-2xl font-bold text-accent"><?php echo e($article->title); ?></h3>
-                        <p class="text-light-text/70 mt-2 text-sm leading-relaxed flex-grow" style="height: 6rem;">
-                            <?php echo e(Str::limit($article->description, 120)); ?>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-serif text-xl font-bold text-accent"><?php echo e($article->title); ?></h3>
+                        
+                        <div class="h-20 overflow-hidden">
+                             <p class="text-light-text/70 mt-2 text-sm leading-relaxed break-words">
+                                <?php echo e(Str::limit($article->description, 100)); ?>
 
-                        </p>
-                        <span class="mt-4 inline-block font-semibold text-accent/90 group-hover:text-accent transition-colors">
-                            Lihat Detail &rarr;
-                        </span>
+                            </p>
+                        </div>
+
+                        <div class="mt-auto pt-4">
+                            <span class="font-semibold text-accent/90 group-hover:text-accent transition-colors">
+                                Lihat Detail &rarr;
+                            </span>
+                        </div>
                     </div>
                 </div>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); if ($__empty_1): ?>
@@ -100,29 +108,31 @@
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const activityCards = document.querySelectorAll('.activity-card');
+    if (!activityCards.length) return;
 
-    // Membuat elemen Modal sekali saja
-    const activityModal = document.createElement('div');
-    activityModal.id = 'activity-modal';
-    activityModal.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden';
-    activityModal.innerHTML = `
-        <div class="modal-content bg-dark-card w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl relative transition-all duration-300">
-            <button class="close-modal absolute top-3 right-3 p-2 rounded-full text-accent/70 hover:bg-primary/50 hover:text-accent transition-colors z-10">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            <img id="modal-image" src="" alt="Gambar Aktivitas" class="w-full h-64 object-cover rounded-t-2xl">
-            <div class="p-8">
-                <h2 id="modal-title" class="text-3xl font-serif font-bold text-accent mb-4"></h2>
-                <p id="modal-description" class="text-light-text/80 leading-relaxed"></p>
+    const modalHTML = `
+        <div id="activity-modal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-[100] flex items-center justify-center p-4 hidden opacity-0 transition-opacity duration-300">
+            <div class="modal-content bg-dark-card w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl relative transition-all duration-300 scale-95 opacity-0">
+                <button class="close-modal absolute top-3 right-3 p-2 rounded-full text-accent/70 hover:bg-primary/50 hover:text-accent transition-colors z-10">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                <img id="modal-image" src="" alt="Gambar Aktivitas" class="w-full h-64 object-cover rounded-t-2xl">
+                <div class="p-8">
+                    <h2 id="modal-title" class="text-3xl font-serif font-bold text-accent mb-4"></h2>
+                    <p id="modal-description" class="text-light-text/80 leading-relaxed break-words"></p>
+                </div>
             </div>
         </div>
     `;
-    document.body.appendChild(activityModal);
-    lucide.createIcons(); // Inisialisasi ikon 'x'
-
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+    const activityModal = document.getElementById('activity-modal');
+    lucide.createIcons();
+    
+    const modalContent = activityModal.querySelector('.modal-content');
     const modalImage = activityModal.querySelector('#modal-image');
     const modalTitle = activityModal.querySelector('#modal-title');
     const modalDescription = activityModal.querySelector('#modal-description');
@@ -133,38 +143,30 @@ document.addEventListener('DOMContentLoaded', () => {
         modalDescription.textContent = card.dataset.description;
         
         activityModal.classList.remove('hidden');
+        setTimeout(() => {
+            activityModal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95', 'opacity-0');
+        }, 10);
         document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
-        activityModal.classList.add('hidden');
-        document.body.style.overflow = '';
+        activityModal.classList.add('opacity-0');
+        modalContent.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            activityModal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 300);
     }
 
-    activityCards.forEach(card => {
-        card.addEventListener('click', () => {
-            openModal(card);
-        });
-    });
-
+    activityCards.forEach(card => card.addEventListener('click', () => openModal(card)));
     activityModal.querySelector('.close-modal').addEventListener('click', closeModal);
-    activityModal.addEventListener('click', (e) => {
+    activityModal.addEventListener('click', e => {
         if (e.target === activityModal) closeModal();
     });
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
         if (e.key === 'Escape' && !activityModal.classList.contains('hidden')) closeModal();
     });
-
-    // Animasi scroll-reveal (tetap sama)
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, { threshold: 0.1 });
-    
-    document.querySelectorAll('.reveal-animation').forEach(el => observer.observe(el));
 });
 </script>
 <?php $__env->stopPush(); ?>

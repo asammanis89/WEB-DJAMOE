@@ -13,9 +13,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
-    {{-- Swiper Slider --}}
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
     {{-- Tailwind Config --}}
     <script>
         tailwind.config = {
@@ -43,25 +40,29 @@
         .reveal-animation.is-visible { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
     </style>
 
+    {{-- Placeholder untuk CSS tambahan dari halaman lain --}}
     @stack('styles')
 </head>
-<body class="bg-dark-bg text-light-text min-h-screen flex flex-col">
+<body class="bg-dark-bg text-light-text min-h-screen flex flex-col overflow-x-hidden">
 
-    {{-- Navbar --}}
+    {{-- Memanggil file Navbar --}}
     @include('partials.navbar')
 
     {{-- Main Content --}}
     <main class="flex-grow">
+        {{-- INI BAGIAN PALING PENTING --}}
+        {{-- Semua konten dari file seperti welcome.blade.php akan ditampilkan di sini. --}}
         @yield('content')
     </main>
 
-    {{-- Footer --}}
+    {{-- Memanggil file Footer --}}
     @include('partials.footer')
 
     {{-- WhatsApp Bubble --}}
-    <a href="https://wa.me/{{ $whatsappNumber ?? '6282232279783' }}?text={{ urlencode('Halo, saya tertarik dengan produk Djamoe.') }}"
+    {{-- DIPERBAIKI: Menghapus variabel PHP agar tidak bergantung pada Controller --}}
+    <a href="https://wa.me/6282232279783?text={{ urlencode('Halo, saya tertarik dengan produk Djamoe.') }}"
        target="_blank"
-       class="wa-bubble fixed bottom-20 md:bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+       class="wa-bubble fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
         <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
     
@@ -74,24 +75,6 @@
             <div id="modal-body">
                 {{-- Konten Modal akan diisi oleh JavaScript dari halaman produk --}}
             </div>
-        </div>
-    </div>
-
-    {{-- Mobile Bottom Nav --}}
-    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-dark-card/80 backdrop-blur-lg border-t border-accent/20">
-        <div class="flex justify-around items-center h-16">
-            <a href="{{ url('/') }}" class="flex flex-col items-center justify-center {{ request()->is('/') ? 'text-accent font-bold' : 'text-accent/70' }} transition-colors">
-                <i data-lucide="home" class="w-6 h-6 mb-1"></i><span class="text-xs">Beranda</span>
-            </a>
-            <a href="{{ url('/produk') }}" class="flex flex-col items-center justify-center {{ request()->is('produk') ? 'text-accent font-bold' : 'text-accent/70' }} transition-colors">
-                <i data-lucide="shopping-bag" class="w-6 h-6 mb-1"></i><span class="text-xs">Produk</span>
-            </a>
-            <a href="{{ url('/aktivitas') }}" class="flex flex-col items-center justify-center {{ request()->is('aktivitas') ? 'text-accent font-bold' : 'text-accent/70' }} transition-colors">
-                <i data-lucide="zap" class="w-6 h-6 mb-1"></i><span class="text-xs">Aktivitas</span>
-            </a>
-            <a href="{{ url('/outlet') }}" class="flex flex-col items-center justify-center {{ request()->is('outlet') ? 'text-accent font-bold' : 'text-accent/70' }} transition-colors">
-                <i data-lucide="map-pin" class="w-6 h-6 mb-1"></i><span class="text-xs">Temukan Kami</span>
-            </a>
         </div>
     </div>
 
@@ -116,6 +99,7 @@
                 });
             }
 
+            // Sembunyikan navbar saat scroll ke bawah
             let lastScrollTop = 0;
             window.addEventListener('scroll', () => {
                 let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -129,15 +113,17 @@
                 lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
             }, false);
 
+            // Animasi saat elemen masuk viewport
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('is-visible'); });
             }, { threshold: 0.1 });
             document.querySelectorAll('.reveal-animation').forEach(el => observer.observe(el));
+            
             lucide.createIcons();
         });
     </script>
 
+    {{-- Placeholder untuk JavaScript tambahan dari halaman lain --}}
     @stack('scripts')
 </body>
 </html>
-

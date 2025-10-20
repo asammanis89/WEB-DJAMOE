@@ -14,9 +14,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
     
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
-    
     <script>
         tailwind.config = {
             theme: {
@@ -43,15 +40,18 @@
         .reveal-animation.is-visible { opacity: 1; filter: blur(0); transform: translateY(0) scale(1); }
     </style>
 
+    
     <?php echo $__env->yieldPushContent('styles'); ?>
 </head>
-<body class="bg-dark-bg text-light-text min-h-screen flex flex-col">
+<body class="bg-dark-bg text-light-text min-h-screen flex flex-col overflow-x-hidden">
 
     
     <?php echo $__env->make('partials.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     
     <main class="flex-grow">
+        
+        
         <?php echo $__env->yieldContent('content'); ?>
     </main>
 
@@ -59,9 +59,10 @@
     <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     
-    <a href="https://wa.me/<?php echo e($whatsappNumber ?? '6282232279783'); ?>?text=<?php echo e(urlencode('Halo, saya tertarik dengan produk Djamoe.')); ?>"
+    
+    <a href="https://wa.me/6282232279783?text=<?php echo e(urlencode('Halo, saya tertarik dengan produk Djamoe.')); ?>"
        target="_blank"
-       class="wa-bubble fixed bottom-20 md:bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
+       class="wa-bubble fixed bottom-6 right-6 z-50 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-110">
         <i data-lucide="message-circle" class="w-8 h-8"></i>
     </a>
     
@@ -74,24 +75,6 @@
             <div id="modal-body">
                 
             </div>
-        </div>
-    </div>
-
-    
-    <div class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-dark-card/80 backdrop-blur-lg border-t border-accent/20">
-        <div class="flex justify-around items-center h-16">
-            <a href="<?php echo e(url('/')); ?>" class="flex flex-col items-center justify-center <?php echo e(request()->is('/') ? 'text-accent font-bold' : 'text-accent/70'); ?> transition-colors">
-                <i data-lucide="home" class="w-6 h-6 mb-1"></i><span class="text-xs">Beranda</span>
-            </a>
-            <a href="<?php echo e(url('/produk')); ?>" class="flex flex-col items-center justify-center <?php echo e(request()->is('produk') ? 'text-accent font-bold' : 'text-accent/70'); ?> transition-colors">
-                <i data-lucide="shopping-bag" class="w-6 h-6 mb-1"></i><span class="text-xs">Produk</span>
-            </a>
-            <a href="<?php echo e(url('/aktivitas')); ?>" class="flex flex-col items-center justify-center <?php echo e(request()->is('aktivitas') ? 'text-accent font-bold' : 'text-accent/70'); ?> transition-colors">
-                <i data-lucide="zap" class="w-6 h-6 mb-1"></i><span class="text-xs">Aktivitas</span>
-            </a>
-            <a href="<?php echo e(url('/outlet')); ?>" class="flex flex-col items-center justify-center <?php echo e(request()->is('outlet') ? 'text-accent font-bold' : 'text-accent/70'); ?> transition-colors">
-                <i data-lucide="map-pin" class="w-6 h-6 mb-1"></i><span class="text-xs">Temukan Kami</span>
-            </a>
         </div>
     </div>
 
@@ -116,6 +99,7 @@
                 });
             }
 
+            // Sembunyikan navbar saat scroll ke bawah
             let lastScrollTop = 0;
             window.addEventListener('scroll', () => {
                 let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
@@ -129,16 +113,18 @@
                 lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
             }, false);
 
+            // Animasi saat elemen masuk viewport
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('is-visible'); });
             }, { threshold: 0.1 });
             document.querySelectorAll('.reveal-animation').forEach(el => observer.observe(el));
+            
             lucide.createIcons();
         });
     </script>
 
+    
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 </html>
-
 <?php /**PATH D:\SEMESTER 5\PROYEK TEKNOLOGI INFORMASI\PERTEMUAN 5\djamoe-web-template\resources\views/layouts/app.blade.php ENDPATH**/ ?>

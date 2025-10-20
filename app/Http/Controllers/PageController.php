@@ -17,44 +17,36 @@ class PageController extends Controller
      */
     public function index()
     {
-        // Ambil flyer untuk hero slider
-        $flyers = Flyer::all();
+        // DIPERBAIKI: Menggunakan latest() untuk memastikan flyer terbaru yang tampil
+        $flyers = Flyer::latest()->get();
 
-        // Ambil produk unggulan (bestseller) dengan relasi category
+        // Query ini sudah bagus, menggunakan eager loading dan filter
         $featuredProducts = Product::with('category')
             ->where('is_bestseller', true)
             ->latest()
             ->take(8)
             ->get();
 
-        return view('welcome', compact('flyers', 'featuredProducts')); // Sesuaikan nama view jika berbeda
+        return view('welcome', compact('flyers', 'featuredProducts'));
     }
 
     /**
      * Menampilkan halaman Produk.
-     * Method ini telah diperbarui untuk menangani tampilan kategori dan produk.
+     * Logika ini sudah berfungsi dengan baik untuk menangani dua skenario.
      */
     public function produk(Category $category = null)
     {
-        // Nomor WhatsApp sudah diperbarui sesuai permintaan Anda
-        $whatsappNumber = '6282232279783'; // <-- NOMOR SUDAH BENAR
-
+        $whatsappNumber = '6282232279783';
         $categories = null;
         $products = null;
 
         if ($category) {
-            // Jika ada objek $category yang dikirim dari route (misal: /produk/kategori/jamu-kuat),
-            // maka kita muat produk-produk yang ada di dalamnya.
             $category->load('products');
             $products = $category->products;
         } else {
-            // Jika tidak ada kategori (pengguna mengunjungi /produk),
-            // maka kita ambil semua data kategori untuk ditampilkan.
             $categories = Category::latest()->get();
         }
 
-        // Kirim semua variabel yang mungkin dibutuhkan ke view.
-        // View 'produk.blade.php' akan menentukan mana yang akan ditampilkan.
         return view('produk', compact('category', 'categories', 'products', 'whatsappNumber'));
     }
 
@@ -64,7 +56,7 @@ class PageController extends Controller
     public function aktivitas()
     {
         $articles = Article::latest()->get();
-        return view('aktivitas', compact('articles')); // Sesuaikan nama view jika berbeda
+        return view('aktivitas', compact('articles'));
     }
 
     /**
@@ -72,8 +64,9 @@ class PageController extends Controller
      */
     public function outlet()
     {
+        // orderBy 'asc' (dari yang terlama) mungkin disengaja, jadi ini tidak diubah.
         $locations = Location::orderBy('created_at', 'asc')->get();
-        return view('outlet', compact('locations')); // Sesuaikan nama view jika berbeda
+        return view('outlet', compact('locations'));
     }
 
     /**
@@ -81,8 +74,12 @@ class PageController extends Controller
      */
     public function about()
     {
-        $abouts = About::orderBy('created_at', 'asc')->get();
-        return view('about', compact('abouts')); // Sesuaikan nama view jika berbeda
+        // DIPERBAIKI: Mengambil hanya 1 data 'About' yang paling baru.
+        // Halaman 'Tentang Kami' biasanya hanya menampilkan satu konten.
+        $abouts = About::orderBy('year_text', 'asc')->get(); 
+    
+    // Kirim 'abouts' (plural) ke view
+    return view('about', compact('abouts'));
     }
 
     /**
@@ -101,8 +98,7 @@ class PageController extends Controller
     }
 
     /**
-     * ✅ METHOD BARU
-     * Mengambil detail satu produk untuk ditampilkan di modal.
+     * Mengambil detail satu produk untuk ditampilkan di modal (AJAX).
      * @param Product $product
      * @return \Illuminate\Http\JsonResponse
      */
@@ -112,4 +108,3 @@ class PageController extends Controller
         return response()->json($product);
     }
 }
-

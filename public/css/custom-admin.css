@@ -1,0 +1,46 @@
+/* public/css/custom-admin.css */
+
+/* ========================================= */
+/* 1. SIDEBAR (Warna #059669) */
+/* ========================================= */
+
+/* Latar Belakang Sidebar Utama */
+.sidebar-dark-djamoe {
+    background-color: #059669 !important;
+    color: #ffffff;
+}
+
+/* Warna Item Menu Saat AKTIF / HOVER / Terbuka */
+/* Ini adalah kelas yang menimpa warna biru default (.bg-primary) */
+.sidebar-dark-djamoe .nav-link.active,
+.sidebar-dark-djamoe .nav-link.active:hover,
+.sidebar-dark-djamoe .nav-sidebar > .nav-item.menu-open > .nav-link {
+    background-color: #047857 !important; /* Hijau yang lebih gelap untuk kontras */
+    color: #ffffff !important;
+}
+
+/* Warna Teks/Ikon Default Sidebar */
+.sidebar-dark-djamoe .nav-link > p,
+.sidebar-dark-djamoe .nav-icon {
+    color: #ffffff !important;
+}
+
+
+/* ========================================= */
+/* 2. NAVBAR (Warna #059669) */
+/* ========================================= */
+
+/* Latar Belakang Top Navbar */
+.navbar-djamoe {
+    background-color: #059669 !important;
+}
+
+/* Warna Teks/Ikon di Navbar */
+.navbar-dark.navbar-djamoe .nav-link {
+    color: #ffffff !important;
+}
+
+/* Warna Brand Text di Navbar */
+.navbar-dark.navbar-djamoe .navbar-brand {
+    color: #ffffff !important;
+}

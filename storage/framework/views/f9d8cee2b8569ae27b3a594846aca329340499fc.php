@@ -20,7 +20,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="title" value="<?php echo e(old('title')); ?>" required>
+unset($__errorArgs, $__bag); ?>" id="title" value="<?php echo e(old('title')); ?>" placeholder="Contoh: Kelas Meracik Jamu" required>
                 <?php $__errorArgs = ['title'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -32,7 +32,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="form-group">
-                <label for="subtitle">Sub Judul (Teks besar di gambar)</label>
+                <label for="subtitle">Sub Judul</label>
                 <input type="text" name="subtitle" class="form-control <?php $__errorArgs = ['subtitle'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -40,7 +40,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="subtitle" value="<?php echo e(old('subtitle')); ?>" required>
+unset($__errorArgs, $__bag); ?>" id="subtitle" value="<?php echo e(old('subtitle')); ?>" placeholder="Teks yang tampil di atas gambar" required>
                 <?php $__errorArgs = ['subtitle'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -52,7 +52,7 @@ unset($__errorArgs, $__bag); ?>
             </div>
 
             <div class="form-group">
-                <label for="description">Deskripsi</label>
+                <label for="description">Deskripsi Lengkap</label>
                 <textarea name="description" class="form-control <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -60,7 +60,7 @@ if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
-unset($__errorArgs, $__bag); ?>" id="description" rows="5" required><?php echo e(old('description')); ?></textarea>
+unset($__errorArgs, $__bag); ?>" id="description" rows="5" placeholder="Jelaskan tentang aktivitas atau artikel ini..." required><?php echo e(old('description')); ?></textarea>
                 <?php $__errorArgs = ['description'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -105,9 +105,15 @@ unset($__errorArgs, $__bag); ?>
 
 <?php $__env->startSection('js'); ?>
 <script>
-    // Inisialisasi plugin untuk menampilkan nama file pada input file bootstrap
-    $(document).ready(function () {
-        bsCustomFileInput.init();
+    // PERBAIKAN SCRIPT INPUT FILE
+    document.addEventListener('DOMContentLoaded', function () {
+        // Menggunakan jQuery yang sudah ada di AdminLTE
+        $('.custom-file-input').on('change', function(event) {
+            var inputFile = event.currentTarget;
+            $(inputFile).parent()
+                .find('.custom-file-label')
+                .html(inputFile.files[0].name);
+        });
     });
 </script>
 <?php $__env->stopSection(); ?>
