@@ -111,7 +111,7 @@ body {
 <!-- CERITA KAMI -->
 <section class="py-20 bg-[#1a3a24]">
     <div class="container mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-        <img src="{{ asset('gambar/gambar1.jpg') }}" alt="Proses Pembuatan D'jamoe" class="rounded-2xl shadow-xl reveal-animation w-full">
+        <img src="{{ asset('gambar\gambar21_(9).jpg') }}" alt="Proses Pembuatan D'jamoe" class="rounded-2xl shadow-xl reveal-animation w-full">
         <div class="reveal-animation text-center md:text-left">
             <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#E6D793]">Cerita Kami</h2>
             <p class="mt-4 text-[#E6D793]/70">D'jamoe lahir dari kecintaan untuk melestarikan resep warisan keluarga yang telah terbukti khasiatnya selama beberapa generasi. Kami percaya bahwa alam menyediakan semua yang kita butuhkan untuk hidup sehat.</p>

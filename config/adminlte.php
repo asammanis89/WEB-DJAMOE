@@ -47,7 +47,7 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'logo' => "<b>D'jamoe</b>LTE",
+    'logo' => "<b>D'jamoe</b>",
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -92,7 +92,7 @@ return [
     | User Menu
     |--------------------------------------------------------------------------
     */
-
+    'user_name_field' => 'username',
     'usermenu_enabled' => true,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',

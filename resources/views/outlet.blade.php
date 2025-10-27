@@ -4,10 +4,10 @@
 
 @section('content')
 <!-- Hero Section -->
-<section class="relative h-[60vh] bg-cover bg-center flex items-center justify-center text-center text-white" style="background-image: linear-gradient(rgba(10, 28, 17, 0.7), rgba(10, 28, 17, 0.8)), url('https://placehold.co/1920x1080/1a3a24/0a1c11?text=Lokasi');">
+<section class="relative h-[60vh] bg-cover bg-center flex items-center justify-center text-center text-white" style="background-image: linear-gradient(rgba(10, 28, 17, 0.7), rgba(10, 28, 17, 0.8)), url('{{ asset('gambar/gambar2.jpeg') }}');">
     <div class="reveal-animation">
         <h1 class="text-4xl md:text-7xl font-serif font-bold text-accent">Temukan Kami</h1>
-        <p class="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-white/90">Dapatkan produk D'jamoe di mitra terdekat Anda.</p>
+        
     </div>
 </section>
 

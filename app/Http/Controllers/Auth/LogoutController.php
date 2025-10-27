@@ -10,9 +10,12 @@ class LogoutController extends Controller
 {
     public function logout(Request $request)
     {
+        // Hapus semua session
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/');
+
+        // Arahkan ke login
+        return redirect()->route('login')->with('success', 'Anda telah logout.');
     }
 }

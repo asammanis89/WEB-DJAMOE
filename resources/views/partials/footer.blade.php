@@ -9,10 +9,10 @@
             <div>
                 <h3 class="font-bold text-lg mb-4 text-accent">Media Sosial</h3>
                 <div class="flex space-x-6 justify-center md:justify-start">
-                    <a href="#" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-instagram-48.png') }}" alt="Instagram D'jamoe" class="w-10 h-10"></a>
-                    <a href="#" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-facebook-48.png') }}" alt="Facebook D'jamoe" class="w-10 h-10"></a>
-                    <a href="#" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-whatsapp-48.png') }}" alt="WhatsApp D'jamoe" class="w-10 h-10"></a>
-                    <a href="#" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-tiktok-48.png') }}" alt="TikTok D'jamoe" class="w-10 h-10"></a>
+                    <a href="https://www.instagram.com/Djamoe_madiun" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-instagram-48.png') }}" alt="Instagram D'jamoe" class="w-10 h-10"></a>
+                    <a href="https://www.facebook.com/djamoe.madiun" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-facebook-48.png') }}" alt="Facebook D'jamoe" class="w-10 h-10"></a>
+                    <a href="https://api.whatsapp.com/send/?phone=6282232279783&text=Halo+saya+ingin+membeli+produk+Djamoe&type=phone_number&app_absent=0" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-whatsapp-48.png') }}" alt="WhatsApp D'jamoe" class="w-10 h-10"></a>
+                    <a href="https://www.tiktok.com/@djamoemadiun" class="transition-transform hover:scale-110"><img src="{{ asset('gambar/icons8-tiktok-48.png') }}" alt="TikTok D'jamoe" class="w-10 h-10"></a>
                 </div>
             </div>
              <div>

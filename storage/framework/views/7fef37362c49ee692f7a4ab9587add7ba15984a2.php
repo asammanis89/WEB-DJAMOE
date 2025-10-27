@@ -1,5 +1,9 @@
 
 
+<?php $__env->startSection('content_header'); ?>
+    
+<?php $__env->stopSection(); ?>
+
 <?php $__env->startSection('title', 'Dashboard - Ringkasan Administrasi'); ?>
 
 <?php $__env->startSection('content'); ?>
@@ -249,7 +253,7 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="page-header">
-            <h1 class="page-title">Dashboard Analitik</h1>
+            <h1 class="page-title">Dashboard</h1>
             <p class="page-subtitle">Ringkasan dan statistik sistem Anda</p>
         </div>
     </div>

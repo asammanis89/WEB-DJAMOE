@@ -34,7 +34,7 @@
             <div class="bg-dark-card rounded-2xl shadow-xl p-8 md:p-12 reveal-animation">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div>
-                        <img src="https://placehold.co/800x600/102b19/E6D793?text=Wawasan+Jamu" alt="Wawasan tentang Jamu" class="rounded-lg shadow-lg mb-6 w-full object-cover aspect-video">
+                        <img src="gambar\gambar21_(11).jpg" alt="Wawasan tentang Jamu" class="rounded-lg shadow-lg mb-6 w-full object-cover aspect-video">
                         <h3 class="text-3xl font-serif font-bold text-accent">Selami Lebih Dalam Dunia Jamu</h3>
                         <p class="mt-4 text-light-text/80 leading-relaxed">
                             Kami percaya edukasi adalah kunci untuk melestarikan warisan jamu. Temukan artikel menarik dan tonton video inspiratif kami untuk memperkaya pengetahuan Anda.

@@ -1,5 +1,9 @@
 @extends('admin.layouts.app')
 
+@section('content_header')
+    {{-- Kosongkan untuk menghilangkan judul "Dashboard" default --}}
+@endsection
+
 @section('title', 'Dashboard - Ringkasan Administrasi')
 
 @section('content')
@@ -249,7 +253,7 @@
 <div class="content-header">
     <div class="container-fluid">
         <div class="page-header">
-            <h1 class="page-title">Dashboard Analitik</h1>
+            <h1 class="page-title">Dashboard</h1>
             <p class="page-subtitle">Ringkasan dan statistik sistem Anda</p>
         </div>
     </div>

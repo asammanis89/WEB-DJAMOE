@@ -20,17 +20,17 @@ class LoginController extends Controller
             'password' => 'required',
         ]);
 
+        // Cek apakah akun aktif
+        $user = \App\Models\User::where('email', $request->email)->first();
+        if ($user && !$user->is_active) {
+            return back()->withErrors(['email' => 'Akun ini telah dinonaktifkan.']);
+        }
+
         if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
             $request->session()->regenerate();
             return redirect()->intended('/admin');
         }
 
-        return back()->withErrors(['email' => 'Email atau password salah.'])->onlyInput('email');
-    }
-
-    // Redirect setelah login sukses
-    protected function authenticated(Request $request, $user)
-    {
-        return redirect()->intended('/admin');
+        return back()->withErrors(['email' => 'Email atau password salah.']);
     }
 }
