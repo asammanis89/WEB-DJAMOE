@@ -16,3 +16,7 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Log & cache lokal
+/storage/logs/*.log
+/storage/framework/views/*.php
