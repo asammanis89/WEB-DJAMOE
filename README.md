@@ -7,5 +7,6 @@ Versi awal website D'jamoe (Laravel) sebelum dikembangkan menjadi versi dwibahas
 ## Tech stack
 PHP, Laravel, MySQL, AdminLTE
 
-## Pengembang
-**Ardha Febrian Muqorrobin** – [Portofolio](https://asammanis89.github.io) · [LinkedIn](https://www.linkedin.com/in/ardha-febrian-342317289/)
+---
+
+Dibuat oleh Ardha Febrian. Portofolio dan kontak: [asammanis89.github.io](https://asammanis89.github.io), WhatsApp [0857-5517-1491](https://wa.me/6285755171491).
